@@ -1,0 +1,62 @@
+// Louis Yagodich
+// ConePyramid.java
+// 1/27/2022
+// Program to calculate the volume or surface area of a cone or pyramid
+
+import java.util.Scanner;
+
+public class ConePyramid {
+	
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		//variable establishment
+		int shape;
+		int calc;
+		double radedge;
+		double height;
+		double answer;
+		
+		//inputs
+		System.out.print("Choose shape, 1 for pyramid, 2 for cone.. ");
+		shape = input.nextInt();
+		System.out.print("\nChoose type of calculation, 1 for volume, 2 for surface area.. ");
+		calc = input.nextInt();
+		
+		//inputs for cone
+		if (shape == 2) {
+			System.out.print("\nEnter radius of the cone.. ");
+			radedge = input.nextDouble();
+			System.out.print("\nEnter height of the cone.. ");
+			height = input.nextDouble();
+			
+			//calculations for cone
+			if (calc == 1) {
+				answer = Math.PI * Math.pow(radedge, 2) * (height/3);
+				System.out.printf("The answer is "+"%.4f", answer);
+			}
+			if (calc == 2) {
+				answer = Math.PI * radedge * (radedge + Math.sqrt(Math.pow(height, 2) + Math.pow(radedge, 2)));
+				System.out.printf("The answer is "+"%.4f", answer);
+			}
+		}
+		
+		//inputs for pyramid
+		if (shape == 1) {
+			System.out.print("\nEnter the base edge of the pyramid.. ");
+			radedge = input.nextDouble();
+			System.out.print("\nEnter height of the pyramid.. ");
+			height = input.nextDouble();
+			
+			//calculations for pyramid
+			if (calc == 1) {
+				answer = Math.pow(radedge,2) * (height/3);
+				System.out.printf("The answer is "+"%.4f", answer);
+			}
+			if (calc == 2) {
+				answer = Math.pow(radedge,2) + 2 * radedge * Math.sqrt((Math.pow(radedge, 2) / 4) + Math.pow(height, 2));
+				System.out.printf("The answer is "+"%.4f", answer);
+			}
+		}
+	}
+}

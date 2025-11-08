@@ -1,0 +1,176 @@
+// A class containing static methods for dealing with postfix expressions
+// The two public static methods are for 
+//     1. coverting an infix expression to a postfix expression
+//     2. evaluating a postfix expression
+// The private static methods are helper methods that are called
+// by the public static methods as necessary
+// You have to complete all the methods using the comments within the code
+
+
+public class Postfix 
+{
+	public static String convertToPostfix(String infix)
+	{
+		LinkedStack<Character> operatorStack = new LinkedStack<>();
+		// String postfix = a new empty String
+		String postfix = "";
+		
+		char topOperator;
+
+		//Set up loop to iterate through characters in infix 
+		for (int i = 0; i < infix.length(); i++)
+		{
+			//char nextCharacter = next character of infix
+			char nextCharacter = infix.charAt(i);
+			if (Character.isLetter(nextCharacter))
+				// Append nextCharacter to postfix
+				postfix = postfix + nextCharacter;
+				
+			else {
+				switch (nextCharacter)
+				{
+					case '+': case '-': case '*': case '/':
+						// while operatorStack is not empty and 
+						// precedence of nextCharacter <= precedence of operatorStack.peek()
+						while (!operatorStack.isEmpty() && (getPrecedence(nextCharacter) <= getPrecedence(operatorStack.peek())))
+			
+						{
+							// Append operatorStack.peek() to postfix
+							postfix = postfix + operatorStack.peek();
+							operatorStack.pop();
+						} 
+ 
+						operatorStack.push(nextCharacter);
+						break;
+				   
+					case '(':
+						operatorStack.push(nextCharacter);
+						break;
+
+					case ')': 
+						topOperator = operatorStack.pop();
+						while (topOperator != '(')
+						{
+							//Append topOperator to postfix
+							postfix = postfix + topOperator;
+							topOperator = operatorStack.pop();
+						} 
+						break;
+
+					default: break;
+				}
+			}
+		}
+    
+		while (!operatorStack.isEmpty())
+		{
+			topOperator = operatorStack.pop();
+			//Append topOperator to postfix
+			postfix = postfix + topOperator;
+		} 
+		return postfix.toString();
+	}
+
+	// Indicates the precedence of a given operator.
+	// Precondition: operator is a character that is (, ), +, -, *, or /.
+	// Returns an integer that indicates the precedence of operator:
+	//         0 if ( or ), 1 if + or -, 2 if * or /, 
+	//         -1 if anything else. 
+	private static int getPrecedence(char operator)
+	{
+		int pre = -1;
+		switch(operator) {
+			case '(', ')':
+			pre = 0;
+			break;
+			 case '+', '-':
+			 pre = 1;
+			 break;
+			 case '*', '/':
+			 pre = 2;
+			 break;
+			 default:
+		}
+		return pre;
+	}
+
+
+	public static double evaluatePostfix(String postfix)
+	{
+		LinkedStack<Double> valueStack = new LinkedStack<>();
+      
+		// loop to iterate through postfix
+		for (int i = 0; i < postfix.length(); i++)
+		{
+		
+			//nextCharacter = next character in postfix
+			char nextCharacter = postfix.charAt(i);
+			if (Character.isLetter(nextCharacter))
+				valueStack.push(valueOf(nextCharacter));  
+			else {
+				switch(nextCharacter)  {
+				   
+					case '+': case '-': case '*': case '/': case '^':
+						double operandTwo = valueStack.pop();
+						double operandOne = valueStack.pop();
+						// result = the result of the operation in nextCharacter 
+						// and its operands operandOne and operandTwo
+						double result = compute(operandOne, operandTwo, nextCharacter);
+						valueStack.push(result);
+						break;
+					   
+					default: break;
+				}
+			}
+		}       
+		return (valueStack.peek()).doubleValue();
+	}
+
+	// method to set values of 2.0 for a, 3.0 for b, 4.0 for c
+	// 5.0 for d and 6.0 for e. Other values are assigned 0
+	private static double valueOf(char variable)
+	{
+		double pre = 0;
+		switch(variable) {
+			case 'a':
+			pre = 2.0;
+			break;
+			case 'b':
+			pre = 3.0;
+			break;
+			case 'c':
+			pre = 4.0;
+			break;
+			case 'd':
+			pre = 5.0;
+			break;
+			case 'e':
+			pre = 6.0;
+			default:
+		}
+		return pre;
+	}
+
+	// method to calculate the result of two operands with
+	// an operator which is either +, -, * or /
+	private static double compute(double operandOne, double operandTwo, char operator)
+	{
+		double calculation = 0;
+		switch (operator) {
+			case '+':
+			calculation = (operandOne + operandTwo);
+			break;
+			case '-':
+			calculation = (operandOne - operandTwo);
+			break;
+			case '*':
+			calculation = (operandOne * operandTwo);
+			break;
+			case '/':
+			calculation = (operandOne / operandTwo);
+			break;
+		return calculation;
+		}
+	}
+} 
+                 

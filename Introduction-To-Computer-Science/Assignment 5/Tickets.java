@@ -1,0 +1,81 @@
+// Louis Yagodich
+// Tickets.java
+// 2/10/2022
+// Program to calculate ticket cost with potential discount
+
+import java.util.Scanner;
+
+public class Tickets {
+	
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		//variable establishment
+		int ticketA;
+		int ticketC;
+		double childcost;
+		double adultcost;
+		double groupcost;
+		double finalcost;
+		int sevdignum;
+		boolean discount = false;
+		int divsev;
+		int divele;
+		
+		//inputs
+		System.out.print("Enter the number of child tickets: ");
+		ticketC = input.nextInt();
+		System.out.print("Enter the number of adult tickets: ");
+		ticketA = input.nextInt();
+		System.out.print("Enter 7 digit number: ");
+		sevdignum = input.nextInt();
+		
+		//ticket price calculation
+		if (ticketA + ticketC >= 20) {
+			final double adultrate = 17.50;
+			final double childrate = 12.50;
+			childcost = ticketC * childrate;
+			adultcost = ticketA * adultrate;
+		}
+		else if ((ticketA + ticketC > 10) && (ticketA + ticketC < 20)) {
+			final double adultrate = 18.75;
+			final double childrate = 13.75;
+			childcost = ticketC * childrate;
+			adultcost = ticketA * adultrate;
+		}
+		else {
+			final double adultrate = 20.00;
+			final double childrate = 15.00;
+			childcost = ticketC * childrate;
+			adultcost = ticketA * adultrate;
+		}
+		groupcost = childcost + adultcost;
+		
+		//discount determining
+		divsev = sevdignum % 7;
+		divele = sevdignum % 11;
+		
+		if ((divsev == 0) || (divele == 0)) {
+			if ((divsev != 0) || (divele != 0)) {
+				discount = true;
+			}
+		else {
+			discount = false;
+			}
+		}
+		
+		//final cost calcualtion
+		if (discount == true) {
+			finalcost = (groupcost * 0.95);
+		}
+		else {
+			finalcost = groupcost;
+		}
+		
+		System.out.printf("Total cost of children = "+"%.2f", childcost);
+		System.out.printf("\nTotal cost of adults = "+"%.2f", adultcost);
+		System.out.printf("\nTotal cost of group (no discount) = "+"%.2f", groupcost);
+		System.out.printf("\nDiscount = "+discount);
+		System.out.printf("\nFinal Cost ="+"%.2f", finalcost);
+	}
+}

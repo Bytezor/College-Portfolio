@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Job</title>
+</head>
+
+<body>
+   
+    <?php
+        session_start();
+        
+        $db_location = "localhost";
+        $db_username = "l11206378y";
+        $db_password = "GraVigA#4765";
+        $db_database = "l11206378y_RepairShop";
+        $db_Connection = mysqli_connect("$db_location", "$db_username", "$db_password", "$db_database") or die("Could not connect to the database");
+    
+        /* ********* Make a drop down to show all the customers *************** */
+        echo "
+        <form id='getCustomer' name='getCustomer' method='POST'>";
+        $getCustomer = $_POST['getCustomer'];
+        $result=mysqli_query($db_Connection, "SELECT * FROM Customer") or die("drop down query did not work");
+        
+        echo "
+        <br>Select a customer for job:
+        <select name='custID' id='custID'>
+        <option value='----------'>-----------</option>";
+        while ($row=mysqli_fetch_array($result)) 
+        {
+            echo "<option value='".$row["custID"]."'>".$row['firstName']." ".$row['lastName']."</option>";
+        }
+        echo "
+        </select>
+        <br><br>
+        <input type='submit' name='customer' value='Get the customer information'>
+        </form>
+        <br><br>";
+        
+    /* ****************** Make the 2nd drop down *********************/
+    echo "
+        
+        <form id='getCar' name='getCar' method='POST'>";
+        $getCustCar = $_POST['getCustCar'];
+        $sql = "SELECT * from Car WHERE custID='".$_POST["custID"]."'";
+        echo $sql;
+        echo "<br>";
+        echo "the customer id is: ".$_SESSION['customerID'];
+        echo "<br>";
+
+        $result=mysqli_query($db_Connection, $sql) or die("2nd drop down query did not work");
+        
+        echo "
+        <br>Select a worker's project:
+        <select name='carID' id='carID'>
+        <option value='----------'>-----------</option>";
+        while ($row=mysqli_fetch_array($result)) 
+        {
+            echo "<option value='".$row["carID"]."'>".$row['model']." ".$row['make']."</option>";
+        }
+        echo "
+        </select>
+        <br><br>
+        <input type='submit' name='car' value='Get the car for that customer'>
+        </form>
+        <br><br>";
+
+    /* ******************** end 2nd drop down ************* /
+
+    /* ****************** Make the 3rd drop down *********************/
+    echo "
+        <form id='getEstimate' name='getEstimate' method='POST'>";
+
+        $sql = "SELECT * from Estimate WHERE carID='".$_POST["carID"]."'";
+        echo $sql;
+        echo "<br>";
+        echo "the car id is: ".$_SESSION['custcarID'];
+        echo "<br>";
+
+        $result=mysqli_query($db_Connection, $sql) or die("3rd drop down query did not work");
+        
+        echo "
+        <br>Select a worker's project:
+        <select name='estID' id='estID'>
+        <option value='----------'>-----------</option>";
+        while ($row=mysqli_fetch_array($result)) 
+        {
+            echo "<option value='".$row["estID"]."'>".$row['estID']."</option>";
+        }
+        echo "
+        </select>
+        <br><br>
+        <input type='submit' name='estimate' value='Get the estimate for car'>
+        </form>
+        <br><br>";
+
+    /* ******************** end 3rd drop down ************* /
+
+
+
+    //** ********** Now display that data *******************/
+
+    if(isset($_POST['customer'])) {
+
+       $_SESSION['customerID'] = $_POST['custID'];
+       
+    } elseif(isset($_POST['car'])) {
+
+        $_SESSION['custcarID'] = $_POST['carID'];
+
+    } elseif (isset($_POST['estimate'])) {
+
+        $sql = "xxxxxINSERT INTO Jobs(jobID, jobDate, carID, techID, estID) VALUES (
+            NULL,
+            date('l, F j, Y'), 
+            '" . $_SESSION['custcarID'] . "', 
+            NULL, 
+            '" . $_POST['estimate'] . "')";
+
+        echo "<br>The INSERT SQL: <br>" . $sql . "<br><br>";
+
+        mysqli_query($db_Connection, $sql) or die("The insert did not work");
+        echo "Looks like the insert worked<br><br>";
+        ?>
+        <?php
+    }
+    //if ($_POST['firstName'] != "") {
+
+
+
+        /* Do update here using the data from the form above */
+        /*
+        $sql="INSERT Job SET 
+        lastName = '".$_POST['lastName']."',
+        firstName = '".$_POST['firstName']."',
+        deptName = '".$_POST['deptName']."',
+        birthDate = '".$_POST['birthDate']."',
+        hireDate = '".$_POST['hireDate']."',
+        salary = '".$_POST['salary']."'
+        WHERE custID='".$_POST['custID']."';"
+        ;
+
+        echo "<br>The UPDATE SQL: <br>" . $sql . "<br><br>";
+
+        mysqli_query($db_Connection, $sql) or die("The update did not work");
+        echo "Looks like the update worked<br><br>";
+        $_POST['firstName'] = "";
+        */
+    //}
+
+    $jobs = mysqli_query($db_Connection, "SELECT * FROM Job") or die("The query didn't work");
+
+                $numRecords = mysqli_num_rows($jobs);
+                echo $numRecords." jobs total<br><br>";
+
+                echo "<table border='1'";
+                echo "<tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Completion Date</th>
+                <th>Car ID</th>
+                <th>Technician ID</th>
+                <th>Estimate ID</th>
+                </tr>";
+
+                while($row = mysqli_fetch_array($jobs))
+                {
+                    echo "<tr>";
+                    echo "<td>".$row["jobID"]."</td>";
+                    echo "<td>".$row["jobDate"]."</td>";
+                    echo "<td>".$row["completion"]."</td>";
+                    echo "<td>".$row["carID"]."</td>";
+                    echo "<td>".$row["techID"]."</td>";
+                    echo "<td>".$row["estID"]."</td>";
+                }
+
+                mysqli_close($db_Connection);
+
+
+    
+    ?>
+
+    <br><br>
+    <a href="index.html">Back to Worker-Project Home</a>
+    <br><br>
+</body>
+
+</html>

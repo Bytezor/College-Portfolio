@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class TestPostfix {
+	public static void main(String[] args) {
+		Postfix post = new Postfix();
+		Scanner input = new Scanner(System.in);
+		String infix = "";
+		while(!infix.equals("Q")) {
+			System.out.println("Insert a infix statement or input Q to quit.. ");
+			infix = input.nextLine();
+			final String postfix = post.convertToPostfix(infix);
+			final String calc = post.evaluatePostfix(infix);
+			System.out.println(postfix + " = " + calc);
+		
+		}
+	}
+}

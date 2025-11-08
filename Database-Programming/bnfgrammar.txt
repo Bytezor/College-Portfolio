@@ -1,0 +1,3 @@
+<bin> -> 0 . <decinum> | 0 . 0 | 1 <wholenum> . <decinum>
+<wholenum> -> 0 <wholenum> | 1 <wholenum> | null
+<decinum> -> 0 <decinum> | 1 <decinum> | 1

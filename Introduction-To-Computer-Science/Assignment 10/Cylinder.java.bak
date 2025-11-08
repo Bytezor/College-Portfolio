@@ -1,0 +1,47 @@
+// Louis Yagodich
+// Cylinder.java
+// 3/24/2022
+// Program to use a method to calculate volume and surface area of a cylinder
+
+import java.util.Scanner;
+
+public class Cylinder {
+
+	public static void main(String[] args) {
+		//variable definition, for simplicity the main uses the same variable names as other methods
+		//yesNo for continuation checking
+		Scanner input = new Scanner(System.in);
+		String yesNo = "Y";
+		double radius;
+		double height;
+		while (yesNo.equals("Y")) {
+			System.out.print("Enter the radius of the cylinder ");
+			radius = input.nextDouble();
+			System.out.print("Enter the height of the cylinder ");
+			height = input.nextDouble();
+			display(radius, height);
+			System.out.println("Enter another cylinder? Input anything but Y to quit ");
+			yesNo = input.next();
+		}
+	}
+	
+	//method for calculating volume, returns volume as a variable
+	public static double volCyl(double radius, double height) {
+		double volume;
+		volume = Math.PI * Math.pow(radius, 2) * height;
+		return volume;
+	}
+	
+	//method for calculating surface are, returns area as a variable
+	public static double surfaceAreaCyl(double radius, double height) {
+		double area;
+		area = (Math.PI * radius) * ((2 * radius) + (2 * height));
+		return area;
+	}
+	
+	//procedure to print the output of volCyl and surfaceAreaCyl, will use variables from the main
+	public static void display(double radius, double height) {
+		System.out.println("The volume is " + volCyl(radius, height));
+		System.out.println("The surface area is " + surfaceAreaCyl(radius, height));
+	}
+}

@@ -1,0 +1,33 @@
+// Louis Yagodich
+// Calc.java
+// 1/20/2022
+// Program to do some simple calculations
+
+public class Calc {
+	
+	public static void main(String[] args) {
+		
+		int firstNum = 29645;
+		int secondNum = 392;
+		int sum;
+		int diff;
+		int product;
+		double quotient;
+		double average;
+		int remainder;
+		
+		sum = firstNum + secondNum;
+		diff = firstNum - secondNum;
+		product = firstNum * secondNum;
+		quotient = (double)firstNum / secondNum;
+		average = (double)sum / 2
+		remainder = firstNum %
+		
+		System.out.println("Sum is " + sum);
+		System.out.println("Difference is " + diff);
+		System.out.println("Product is " + product);
+		System.out.println("Quotient is " + quotient);
+		System.out.println("Average is " + average);
+		System.out.println("Remainder is " + remainder);
+	}
+}

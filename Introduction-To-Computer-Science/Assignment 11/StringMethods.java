@@ -1,0 +1,109 @@
+// StringMethods.java
+// March 31, 2022
+// Your Name
+// Program to do certain String operations with methods
+
+
+
+import java.util.Scanner;
+
+public class StringMethods {
+	public static void main(String[] args) {
+	
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter a sentence");
+		String s = input.nextLine();
+		
+		System.out.println("\nNumber of Spaces in the string = " + countSpaces(s) + "\n");
+		System.out.println("Number of E's in the string = " + countChars(s, "E") + "\n");
+		System.out.println("Number of Stars in the string = " + countChars(s, "*") + "\n");
+		System.out.println("Does string contain vowels? " + anyVowels(s) + "\n");
+		System.out.println("String reversed = " + reverse(s) + "\n");
+		System.out.println("String shifted by one letter is " + shift(s)  + "\n");
+	}
+	
+	// method to return the number of spaces in a String
+	public static int countSpaces(String s) {
+		int value = 0;
+		for (int i = 0; i < (s.length()); i++) {
+			if (s.substring(i, i+1).equals(" ")) {
+				value = value + 1;
+			}
+		}
+		return value;
+	}
+	
+	// method to count the number of instances of
+	// a particular character in a String
+	// the method will return the total of upper and lower
+	// case instances if it is a letter
+	public static int countChars(String s, String letter) {
+		int value = 0;
+		for (int i=0; i<(s.length()); i++) {
+			if (s.substring(i, i+1).equals(letter)) {
+				value = value + 1;
+			}
+		}
+		return value;
+	}
+	
+	// method to detect whether a String contains a vowel or not
+	// must include call(s) to countChar
+	// returns true or false
+	public static boolean anyVowels(String s) {
+		boolean trufal = false;
+		for (int i=0; i<(s.length()); i++) {
+			final char letter = s.charAt(i);
+			switch (letter) {
+				case 'A', 'E', 'I', 'O', 'U':
+				trufal = true;
+				break;
+				default:
+			}
+		}
+		return trufal;
+	}
+	
+		
+	// method to return the reverse of a String
+	public static String reverse(String s) {
+		char letter;
+		String reverse = "";
+		for (int i=0; i<(s.length()); i++) {
+			letter = s.charAt(i);
+			reverse = letter + reverse;
+		}
+		return reverse;
+		
+	}
+
+   	// method to return a character shifted one place in the alphabet
+	// a becomes b, b become c etc. z becomes a
+	// A becomes B, B becomes C etc. Z becomes A
+	// all other characters are left unchanged
+ 	public static char shift(String s, int place) {
+		char letter = s.charAt(place);
+		char shifted;
+		if ((letter >= 'a' && letter < 'z') || (letter >= 'A' && letter < 'Z')) {
+			shifted = (char)(letter+1);
+		}
+		else {
+			shifted = (char)(letter);
+		}
+		return shifted;
+	}
+	
+	// method to return a String with each letter shifted one place in the alphabet
+	// method must include call(s) to previous method
+	public static String shift(String s) {
+		char letter;
+		String shifted = "";
+		for (int i=0; i<(s.length()); i++) {
+		letter = shift(s, i);
+		shifted = shifted+shift(s, i);
+		}
+	return shifted;
+	}
+	
+}
+	

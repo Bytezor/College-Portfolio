@@ -1,0 +1,50 @@
+public class DowelGroupTest {
+
+	public static void main(String[] args) {
+		DowelGroup dg = new DowelGroup();
+		System.out.println("Is dg empty? " + dg.isEmpty() + "\n");
+		// Create 9 Dowel objects
+		Dowel d1 = new Dowel("Ash", 3.4, 9);
+		Dowel d2 = new Dowel("Pine", 11.23, 3.45);
+		Dowel d3 = new Dowel("Oak", 23, 9);
+		Dowel d4 = new Dowel("Ash", 31.7, 25.3);
+		Dowel d5 = new Dowel("Pine", 11.1, 11.1);
+		Dowel d6 = new Dowel("Walnut", 9.2, 0.45);
+		Dowel d7 = new Dowel("Ash", 4, 9);
+		Dowel d8 = new Dowel("Pine", 28.4, 28.4);
+		Dowel d9 = new Dowel("Oak", 25, 25);
+
+		// Nine lines to add the Dowels to dg
+		dg.addDowels(d1);
+		dg.addDowels(d2);
+		dg.addDowels(d3);
+		dg.addDowels(d4);
+		dg.addDowels(d5);
+		dg.addDowels(d6);
+		dg.addDowels(d7);
+		dg.addDowels(d8);
+		dg.addDowels(d9);
+		// Use methods from DowelGroup and Dowel to do the following
+		// Print all the Dowels in dg
+		for (int i = 0; i < dg.getNumDowels(); i++) {
+			System.out.println(dg.getDowel(i));
+		}
+		// Print how many Dowels in dg
+		System.out.println("There are " + dg.getNumDowels() + " dowels.");
+		// Calculate and print the largest area of a Dowel in dg
+		System.out.println("The largest area is " + dg.largestArea());
+		// Calculate and print the largest volume of a Dowel in dg
+		System.out.println("The largest volume is " + dg.largestVolume());
+		// Print all the dowels in dg whose volume is greater than 500
+		dg.printLargeDowels(dg);
+		// Print all the dowels made of Ash
+		System.out.println("The dowels made of Ash are " + dg.dowelsMadeOf("Ash"));
+		
+		System.out.println("Is dg empty? " + dg.isEmpty());
+		
+	}
+}
+		
+		
+		
+		

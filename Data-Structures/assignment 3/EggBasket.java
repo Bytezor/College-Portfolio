@@ -1,0 +1,102 @@
+import java.util.Scanner;
+
+public class EggBasket {
+
+	public static double priceCheck(ArrayBag<String> bag, String egg) {
+		egg = egg.toUpperCase();
+		int amount = bag.getFrequencyOf(egg);
+		double price = 0.0;
+		switch (egg){
+			case "WHITE":
+			price = amount * Math.round(1.50);
+			System.out.println("There are " + amount + " " + egg.toLowerCase() + " eggs in the basket");
+			break;
+			
+			case "RED":
+			price = amount * Math.round(2.25);
+			System.out.println("There are " + amount + " " + egg.toLowerCase() + " eggs in the basket");
+			break;
+			
+			case "BLUE":
+			price = amount * Math.round(3.75);
+			System.out.println("There are " + amount + " " + egg.toLowerCase() + " eggs in the basket");
+			break;
+			
+			case "GREEN":
+			price = amount * Math.round(4.50);
+			System.out.println("There are " + amount + " " + egg.toLowerCase() + " eggs in the basket");
+			break;
+			
+			case "PURPLE":
+			price = amount * Math.round(5.00);
+			System.out.println("There are " + amount + " " + egg.toLowerCase() + " eggs in the basket");
+			break;
+			
+			case "GOLD":
+			price = amount * Math.round(10.00);
+			System.out.println("There are " + amount + " " + egg.toLowerCase() + " eggs in the basket");
+			break;
+			
+			default:
+			break;
+		}
+		return price;
+	}
+	
+	public static void massRemove(ArrayBag<String> bag, String egg){
+		egg = egg.toUpperCase();
+		while (bag.getFrequencyOf(egg) > 1) {
+			bag.remove(egg);
+		}
+	}
+
+	public static void main(String[] args) {
+		ArrayBag<String> myEggBasket = new ArrayBag<String>(50);
+		String temp = "";
+		String eggType = "";
+		Scanner input = new Scanner(System.in);
+		while (!eggType.equals("Q")) {
+			System.out.print("Please enter an Egg Type or enter Q to stop input.. ");
+			eggType = input.nextLine();
+			eggType = eggType.toUpperCase();
+			switch (eggType){
+				case "RED":
+				case "WHITE":
+				case "BLUE":
+				case "GREEN":
+				case "PURPLE":
+				case "GOLD":
+				myEggBasket.add(eggType);
+				break;
+				
+				default:
+				System.out.println("Invalid Input");
+				break;
+			}
+		}
+		
+		double totalPrice=0.0;
+		totalPrice = totalPrice + priceCheck(myEggBasket, "WHITE");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "RED");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "BLUE");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "GREEN");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "PURPLE");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "GOLD");
+		System.out.println("The total price count is $" + totalPrice);
+		
+		massRemove(myEggBasket, "WHITE");
+		massRemove(myEggBasket, "RED");
+		massRemove(myEggBasket, "BLUE");
+		massRemove(myEggBasket, "GREEN");
+		massRemove(myEggBasket, "PURPLE");
+		massRemove(myEggBasket, "GOLD");
+		totalPrice = 0;
+		totalPrice = totalPrice + priceCheck(myEggBasket, "WHITE");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "RED");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "BLUE");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "GREEN");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "PURPLE");
+		totalPrice = totalPrice + priceCheck(myEggBasket, "GOLD");
+		System.out.println("The total price count is $" + totalPrice);
+		}
+}

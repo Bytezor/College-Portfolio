@@ -1,0 +1,20 @@
+// Louis Yagodich
+// Ant.java
+// 3/2/2022
+// Program to generate a student ID based on inputs
+
+public class Ant {
+	
+	public static void main(String[] args) {
+		//variable defining
+		double antpop = 6.356;
+		int year = 2021;
+		System.out.printf("Year: "+year+"\tAnt Population: "+"%.3f\n", antpop);
+		//loop for calcualtion
+		while (antpop > 6.0){
+			antpop = antpop * 0.994;
+			year = year + 1;
+			System.out.printf("Year: "+year+"\tAnt Population: "+"%.3f\n", antpop);
+		}
+	}
+}

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">calculator</string>
+    <string name="header_label">Calculator</string>
+    <string name="clear_label">Clear</string>
+    <string name="add_label">+</string>
+    <string name="subtract_label">-</string>
+    <string name="calc_button">Calculate</string>
+    <string name="firstNumber_label">Number 1:</string>
+    <string name="secondNumber_label">Number 2:</string>
+    <string name="input_hint">Enter Number</string>
+    <string name="empty_calc">Results: </string>
+    <string name="calc_result">Result: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

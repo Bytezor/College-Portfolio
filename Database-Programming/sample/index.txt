@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workers Project Database Stuff</title>
+</head>
+<body>
+    <h2>Worker - Project Database</h2>
+    <ul>
+        <li><a href="Workers.php">See a listing of the Workers</a></li>
+        <li><a href="AddWorker.php">Add a worker</a></li>
+        <li><a href="UpdateWorker.php">Update a worker</a></li>
+    </ul>
+
+
+    
+</body>
+</html>

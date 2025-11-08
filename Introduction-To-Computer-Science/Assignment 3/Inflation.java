@@ -1,0 +1,42 @@
+// Louis Yagodich
+// Inflation.java
+// 1/27/2022
+// Program to calculate inputted inflation values
+
+import java.util.Scanner;
+import java.math.RoundingMode;
+
+public class Inflation {
+
+	public static void main(String[] args) {
+		Scanner inputs = new Scanner(System.in);
+		//variables for the inputs to do calculations with, inputs done using scanner "inputs"
+		double cost;
+		double rate;
+		double years;
+		double yinflation;
+		double dinflation;
+		double pow1;
+		double pow2;
+		
+		//inputs
+		System.out.print("Enter original cost..");
+		cost = inputs.nextDouble();
+		System.out.print("\nEnter inflation rate..");
+		rate = inputs.nextDouble();
+		System.out.print("\nEnter number of years..");
+		years = inputs.nextDouble();
+		
+		//variables for error handling
+		pow1 = Math.pow((1+(0.01*rate)),years);
+		pow2 = Math.pow((1+(0.01*rate)/365),(365*years));
+		//calculates yearly and daily inflation using the inputted values
+		yinflation = cost*pow1;
+		dinflation = cost*pow2;
+		
+		//prints results
+		System.out.println("\nOriginal cost = "+cost);
+		System.out.printf("Future cost with inflation yearly = "+"%.2f", yinflation);
+		System.out.printf("\nFuture cost with inflation daily = "+"%.2f", dinflation);
+	}
+}

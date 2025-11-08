@@ -1,0 +1,59 @@
+
+
+public class Length
+{
+	private int meters;
+	private int centimeters;
+	
+	public Length()
+	{
+		meters = 0;
+		centimeters = 0;
+	}
+	
+	public Length(int m, int c)
+	{
+		meters = m;
+		centimeters = c;
+	}
+	
+	public int getMeters()
+	{
+		return meters;
+	}
+	
+	public int getCentimeters()
+	{
+		return centimeters;
+	}
+	
+	public void setMeters(int m)
+	{
+		meters = m;
+	}
+	
+	public void setCentimeters(int c)
+	{
+		centimeters = c;
+	}
+	
+	public int totalCentimeters()
+	{
+		return (centimeters + (meters * 100));
+	}
+	
+	public double totalMeters()
+	{
+		return (meters + (centimeters / 100));
+	}
+	
+	public boolean isLengthZero()
+	{
+		return ((meters + centimeters) == 0);
+	}
+	
+	public String toString()
+	{
+		return ("Length = " + meters + "m Centimeters = " + centimeters + "cm");
+	}
+}
